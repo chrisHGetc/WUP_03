@@ -51,7 +51,14 @@ ggplot(davisdata, aes(x = Seat, y = alcohol, fill = factor(Seat))) +
 
 ## Numerical Summarys 
 
+```{r}
+favstats(alcohol~Seat,data=davisdata)
+```
+The mean amount of alcohol in the back people is 9.625. This results shows that the people in the back are drinking about 3 times the amount than the middle row and about 6 times more than the front. There is 32 people in the back seat, 33 in the front seats and 83 people in the middle rows.  
+
 ## Inferential Tests
+
+
 
 ## Conclusions
 
