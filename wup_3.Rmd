@@ -30,12 +30,6 @@ mutate(across(where(is.character), as.factor))
 
 ## Now add in boxplot
 
-````{r}
-ggplot(davisdata, aes(x = Seat, y = alcohol)) +
-  geom_boxplot() +
-  labs(title = "Box Plot of Alcohol by Seat") +
-  theme(plot.title = element_text(size = 14, hjust = 0.5))
-`````
   
   
 ### get fancy  
@@ -49,6 +43,10 @@ ggplot(davisdata, aes(x = Seat, y = alcohol, fill = factor(Seat))) +
 
 ```
 
+Analyzing the box plot there is a visual difference from the back and front seat. There is not much of a difference between the front and middle seat.
+
+
+
 ## Numerical Summarys 
 
 ```{r}
@@ -58,8 +56,47 @@ The mean amount of alcohol in the back people is 9.625. This results shows that 
 
 ## Inferential Tests
 
+```{r}
+# Load the necessary library
+library(stats)
+
+# Perform ANOVA test
+anova_result <- aov(alcohol ~ Seat, data = davisdata)
+
+# Check the ANOVA table
+summary(anova_result)
+
+```
+With this test there is no significant difference to make a conclusion because the numbers are so low. 
+
+
+```{r,eval=FALSE}
+plot(TukeyHSD(model1))
+```
+In order to intrepid this plot we need to use the confidence internal from back compared to the other seats. There is difference from the back seat from other two rounds. There is no difference between the front row and middle row. 
+
+
+
+
+```{r}
+# Perform Tukey HSD test
+tukey_result <- TukeyHSD(anova_result)
+
+# Print the results
+print(tukey_result)
+
+
+```
+
+The front and back have a very low number p adj meaning there is not significant difference with the
 
 
 ## Conclusions
+
+In summary, based on the analysis, it can be concluded that there is a significant difference in alcohol consumption between the back seat and the other seats. However, no significant difference was observed between the front and middle rows in terms of alcohol consumption.
+
+
+
+
 
 
